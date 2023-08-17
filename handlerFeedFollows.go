@@ -15,7 +15,6 @@ func (apiCfg *apiConfig)handlerCreateFeedFollow(w http.ResponseWriter, r *http.R
 	type parameters	struct {
 		FeedID uuid.UUID `json:"feed_id"`
 	}
-	fmt.Println(r)
 
 	decoder := json.NewDecoder(r.Body)
 	params := &parameters{}
@@ -24,8 +23,6 @@ func (apiCfg *apiConfig)handlerCreateFeedFollow(w http.ResponseWriter, r *http.R
 		respondWithError(w, http.StatusBadRequest, "Error parsing JSON")
 		return
 	}
-	fmt.Println(params.FeedID)
-	fmt.Println(user.ID)
 
 	feedFollow, err := apiCfg.DB.CreateFeedFollow(r.Context(), db.CreateFeedFollowParams{
 		ID:  uuid.New(),
